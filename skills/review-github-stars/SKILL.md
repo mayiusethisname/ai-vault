@@ -7,7 +7,7 @@ description: Use when reviewing a user's GitHub Star list, newly starred reposit
 
 ## Overview
 
-Turn starred repositories into reusable decisions and working assets. Inspect evidence from the repository, judge practical reuse value, update the vault index, and create a skill only when the repository teaches a repeatable workflow rather than merely providing code or a README.
+Turn starred repositories into reusable decisions and working assets. Inspect evidence from the repository, judge practical reuse value, update the vault index, and choose honestly between using the repository as-is, adapting it, keeping it as reference, or skipping it.
 
 ## Workflow
 
@@ -27,11 +27,12 @@ Turn starred repositories into reusable decisions and working assets. Inspect ev
 3. Classify by actual use.
    - Start with: AI prompts, Codex/development automation, documentation, legal/research, PDF/file processing, data analysis, learning/study, or other reference.
    - Add or change a category when the repository does not fit honestly.
-   - Give each repository one disposition: `use-now`, `adapt`, `reference-only`, or `skip`.
-   - `use-now` requires a concrete user situation and a plausible next action.
+   - Give each repository one disposition: `use-as-is`, `adapt`, `reference-only`, or `skip`.
+   - `use-as-is` means the repository is sufficiently usable in its original form and the user should be given the exact install, plugin, clone, or invocation path.
    - `adapt` means the workflow is valuable but needs compatibility, security, licensing, or maintenance review.
    - `reference-only` means the ideas are useful but the repository itself should not be installed or copied.
    - `skip` means the repository has low practical value or disproportionate risk; explain why.
+   - Never adapt a repository merely because it can be adapted. Preserve the original when that is the most reliable and maintainable choice.
 
 4. Decide whether to create a skill.
    Create a skill only when all of these are true:
@@ -42,7 +43,7 @@ Turn starred repositories into reusable decisions and working assets. Inspect ev
    - It does not duplicate an existing skill.
    - Risky external actions can be gated by explicit confirmation.
 
-   Do not create a skill for a one-off script, a generic library, a README summary, a project-specific convention, or code that should be installed unchanged. Preserve those as a reference or integration note.
+   Do not create a skill for a one-off script, a generic library, a README summary, a project-specific convention, or code that should be installed unchanged. For `use-as-is` repositories, record the original usage path and do not rewrite the repository into a skill unless a separate reusable workflow is clearly present.
 
 5. Write the vault entry.
    For every reviewed repository, use this shape:
@@ -57,11 +58,11 @@ Turn starred repositories into reusable decisions and working assets. Inspect ev
    - **How to apply:** ...
    - **Cautions:** ...
    - **Maintenance/licensing note:** ...
-   - **Disposition:** use-now | adapt | reference-only | skip
+   - **Disposition:** use-as-is | adapt | reference-only | skip
    - **Skill candidate:** yes/no, with one-sentence reason
    ```
 
-   Keep the entry specific enough to support a later decision. Separate observed facts from inferences.
+   Keep the entry specific enough to support a later decision. Separate observed facts from inferences. For `use-as-is`, include the exact original installation or invocation instructions and identify what was verified.
 
 6. Update files safely.
    - Update `starred-repos.md` only after the review is complete.
@@ -75,7 +76,7 @@ Turn starred repositories into reusable decisions and working assets. Inspect ev
 Return, in this order:
 
 1. A total Star-list summary: count, categories, and dispositions.
-2. The immediately useful repositories with reasons.
+2. The immediately useful repositories with reasons, clearly separating `use-as-is` from `adapt`.
 3. The complete Markdown draft or the exact files updated.
 4. Skill candidates with proposed paths and trigger descriptions.
 5. Uncertainty and risk notes, including inaccessible repositories or unverified maintenance/licensing information.
@@ -89,5 +90,6 @@ Before finishing, verify:
 - Every recommendation has a concrete use case.
 - Important files are named from repository evidence.
 - Stale, abandoned, misleading, or low-value repositories are called out.
+- Each `use-as-is` recommendation includes a verified original usage path.
 - No repository is converted into a skill solely because it is famous.
 - No external write or installation is implied to have happened unless it actually did.
